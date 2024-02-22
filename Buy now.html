@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="product-details">
+        <h2 id="product-name"></h2>
+        <div class="rating">
+            <i class='bx bxs-star'></i>
+            <i class='bx bxs-star'></i>
+            <i class='bx bxs-star'></i>
+            <i class='bx bx-star'></i>
+            <i class='bx bx-star'></i>
+        </div>
+        <div class="price" id="product-price"></div>
+        <div class="colors" id="product-color"></div>
+    </div>
+
+    <div class="shipping-address">
+        <h2>Shipping Address</h2>
+        <!-- Your shipping address form here -->
+        <form id="shipping-form">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="zipcode">Zip Code:</label>
+            <input type="text" id="zipcode" name="zipcode" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
+
+            <button type="button" class="btn-buy" onclick="buyNow()">Buy Now</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to get URL parameters
+            function getUrlParameter(name) {
+                name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+                let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                let results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            // Function to display product details
+            function displayProductDetails() {
+                let productName = getUrlParameter('product');
+                let productPrice = getUrlParameter('price');
+                let productColor = getUrlParameter('color');
+
+                document.getElementById("product-name").innerText = productName || "England shoes";
+                document.getElementById("product-price").innerText = productPrice ? `$${productPrice}` : "Price: $999.00";
+                document.getElementById("product-color").innerHTML = productColor ? `Color: ${productColor}` : "";
+
+            }
+
+            // Call the function to display product details
+            displayProductDetails();
+        });
+
+        function buyNow() {
+            // Get shipping information
+            let fullname = document.getElementById("fullname").value;
+            let address = document.getElementById("address").value;
+            let city = document.getElementById("city").value;
+            let zipcode = document.getElementById("zipcode").value;
+            let country = document.getElementById("country").value;
+
+            // You can process the purchase or update the UI as needed
+            alert(`Purchase successful! Product: ${document.getElementById("product-name").innerText}, Price: ${document.getElementById("product-price").innerText}, Shipping to: ${fullname}, ${address}, ${city}, ${zipcode}, ${country}`);
+        }
+    </script>
+</body>
+</html>
